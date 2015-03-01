@@ -8,6 +8,7 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   roscpp
   std_msgs
+	message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -44,11 +45,10 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+add_message_files(
+   FILES
+   leapros.msg
+)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -65,10 +65,11 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   geometry_msgs#   std_msgs
-# )
+generate_messages(
+   DEPENDENCIES
+   geometry_msgs
+	 std_msgs
+)
 
 ###################################
 ## catkin specific configuration ##
@@ -94,6 +95,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 # include_directories(include)
 include_directories(
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -103,16 +105,16 @@ include_directories(
 # )
 
 ## Declare a cpp executable
-# add_executable(leap_subscriber_node src/leap_subscriber_node.cpp)
+add_executable(leap_subscriber src/leap_subscriber.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(leap_subscriber_node leap_subscriber_generate_messages_cpp)
+add_dependencies(leap_subscriber leap_subscriber_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(leap_subscriber_node
-#   ${catkin_LIBRARIES}
-# )
+target_link_libraries(leap_subscriber
+   ${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##
